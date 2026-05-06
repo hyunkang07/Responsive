@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>정수라는 이름을 총 5번 출력을 해주세요.</p>
+    <code>
+        let name ="정수"; <br>
+        for(let a=0; a<=4; a++){ <br>
+            document.write("숫자 :"+ name +"<br>"); <br>
+        }
+    </code>
+    <hr>
+    <p>점심메뉴를 월요일부터 금요일까지 알려주세요</p>
+    <code>
+        let lunch = ["라멘","마라탕","햄버거","떡볶이","고민중"]; <br>
+        for(let i=0; i<lunch.length; i++){  <br>
+            document.write(lunch[i]+",");   <br>
+        } <br>
+    </code>
+    <hr>
+    <p>저녁메뉴에서 음식 이름과 가격을 출력해주세요. </p>
+    <code>
+        let dinner = [ <br>
+            {cooking:"짬뽕", price:299000}, <br>
+            {cooking:"막걸리프리미엄", price:125000}, <br>
+            {cooking:"삼계탕", price:599000}, <br>
+            {cooking:"파스타", price:9000} <br>
+        ]
+        for(let d=0; d<dinner.length; d++){ <br>
+            document.write(dinner[d].cooking+":"+dinner[d].price+"<br>"); <br>
+        }
+    </code>
+    <p>
+        "안녕하세요"를 5번 출력하세요.
+    </p>
+    <p>
+        정수1 , 정수2 , 정수3 ,... 정수5까지 출력 
+    </p>
+    <p>
+        1~10까지 숫자를 출력해주세요.
+    </p>
+
+    <h3>구구단</h3>
+    <script>
+
+        for(let v=0; v<=4; v++){
+            document.write("안녕하세요"+"<br>")
+        }
+
+        for(let j=1; j<=5; j++){
+            document.write("정수"+j+"<br>")
+        }
+
+        for(let cc=1; cc<=10; cc++){
+            document.write(cc+"<br>")
+        }
+
+        // 2 * 1 = 2
+
+        // for(let dan=1; dan<=9; dan++){
+        //     document.write("2X"+dan+"="+(2*dan)+"<br>")
+        // }
+
+        for(let dan=2; dan<=9; dan++){
+            for(let n=1; n<=9; n++){
+                document.write(dan+"X"+n+"="+(dan*n)+"<br>");
+            }
+        }
+        // 2 X 1 = 2 ... 
+
+
+        // let name ="정수";
+        // for(let a=0; a<=4; a++){
+        //     document.write("숫자 :"+ name +"<br>");
+        // }
+
+        // let lunch = ["라멘","마라탕","햄버거","떡볶이","고민중"];
+        // for(let i=0; i<lunch.length; i++){
+        //     document.write(lunch[i]+",");
+        // }
+
+        // let dinner = [
+        //     {cooking:"짬뽕", price:299000},
+        //     {cooking:"막걸리프리미엄", price:125000},
+        //     {cooking:"삼계탕", price:599000},
+        //     {cooking:"파스타", price:9000}
+        // ]
+        // for(let d=0; d<dinner.length; d++){
+        //     document.write(dinner[d].cooking+":"+dinner[d].price+"<br>");
+        // }
+    </script>
+</body>
+</html>

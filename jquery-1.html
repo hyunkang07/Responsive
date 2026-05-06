@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+</head>
+<body>
+    <p class="color-text">혜인이가 오늘은 눈이 부었어요!</p>
+    <button class="btn1">버튼을 클릭!</button>
+    <p class="text-num">가은이가 꾸벅할 때마다 1분씩 수업시간은 연장하겠습니다.</p>
+    <button class="btn2">변경대상</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        // let btn1 = document.querySelector(".btn1");
+
+        $(".btn1").click(function(){
+            $(".color-text").css("color","red").css("background-color","blue");
+            $(".color-text").text("우리반연수는 주식1억을 보유하고 있습니다 그것도 해외주식");
+            alert("가은이가 졸고 있다.")
+        })
+        $(".btn2").mouseover(function(){
+            $(".text-num").slideUp();
+        })
+        let btn2 = document.querySelector(".btn2");
+        btn2.addEventListener("mouseover",function(){
+
+        })
+    </script>
+</body>
+</html>

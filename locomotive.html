@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locomotive Scroll Demo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll/bundled/locomotive-scroll.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        section {
+            display: flex;
+            justify-content: center;
+        }
+
+        .sec1 {
+            min-height: 100vh;
+            padding: 42px 32px;
+            background-color: #2F2FA2;
+            color: #fff;
+        }
+
+        .hero-inner {
+            width: min(100%, 1660px);
+            min-height: calc(100vh - 84px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hero-title {
+            margin: 0;
+            font-size: clamp(72px, 9vw, 170px);
+            line-height: 0.9;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+        }
+
+        .hero-copy {
+            align-self: flex-end;
+            width: min(100%, 430px);
+            margin: 0;
+            font-size: 24px;
+            line-height: 1.45;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        .sec2 {
+            min-height: 100vh;
+            align-items: flex-start;
+            padding-top: 200px;
+            background-color: rgb(189, 24, 255);
+            font-size: 30px;
+        }
+
+        p {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: 0.5s;
+        }
+
+        p.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .sec3 {
+            min-height: 200vh;
+            align-items: flex-start;
+            padding-top: 200px;
+        }
+
+        .scroll-section {
+            min-height: 100vh;
+            padding: 50px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
+        }
+
+        .scroll-text {
+            margin: 20px 0;
+            padding: 0;
+            font-size: 50px;
+            color: #333;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+
+        @media (max-width: 900px) {
+            .sec1 {
+                padding: 24px 20px;
+            }
+
+            .hero-inner {
+                min-height: calc(100vh - 48px);
+            }
+
+            .hero-copy {
+                align-self: flex-start;
+                width: 100%;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div data-scroll-container>
+        <section class="sec1" data-scroll-section>
+            <div class="hero-inner">
+                <h1 class="hero-title">
+                    BlueBenny<br>
+                    Media
+                </h1>
+                <p class="hero-copy">
+                    Home to the catalog of one of the most celebrated photographers in the entertainment industry,
+                    E-BENNY.
+                </p>
+            </div>
+        </section>
+
+        <section class="sec2" data-scroll-section>
+            <p class="fade" data-scroll data-scroll-class="active">
+                스크롤하면 문장이 등장합니다.
+            </p>
+        </section>
+
+        <section class="sec3" data-scroll-section>
+            <div>
+                <!-- data-scroll-speed는 스크롤 속도 배수를 뜻합니다. -->
+                <!-- 너무 큰 값은 움직임이 과해질 수 있어 1 ~ 3 정도부터 테스트하는 편이 좋습니다. -->
+                <h1 data-scroll data-scroll-speed="1.5">
+                    <img src="images/gtc2-article-16x9.avif" alt="parallax image">
+                </h1>
+            </div>
+        </section>
+
+        <section class="scroll-section" data-scroll-section>
+            <h1 class="scroll-text" data-scroll>지금까지</h1>
+            <h1 class="scroll-text" data-scroll>스크롤 트리거가</h1>
+            <h1 class="scroll-text" data-scroll>작동하는 애니메이션</h1>
+            <h1 class="scroll-text" data-scroll>입니다.</h1>
+        </section>
+    </div>
+
+    <section style="height: 100vh;"></section>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll/bundled/locomotive-scroll.min.js"></script>
+    <script>
+        const locomotiveScroll = new LocomotiveScroll({
+            el: document.querySelector('[data-scroll-container]'),
+            smooth: true,
+            lerp: 0.1,
+        });
+
+        function updateScrollProgress() {
+            const items = document.querySelectorAll('.scroll-text');
+
+            items.forEach((item) => {
+                const rect = item.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                const screenCenter = windowHeight / 2;
+                const elementTop = rect.top;
+                const elementBottom = rect.bottom;
+                let progress;
+
+                if (elementBottom < screenCenter) {
+                    progress = 1;
+                } else if (elementTop > windowHeight) {
+                    progress = 0;
+                } else {
+                    const elementCenter = elementTop + rect.height / 2;
+                    const distance = Math.abs(elementCenter - screenCenter);
+                    const triggerRange = 300;
+                    progress = Math.max(0, 1 - (distance / triggerRange));
+                }
+
+                item.style.opacity = progress;
+            });
+        }
+
+        window.addEventListener('scroll', updateScrollProgress, { passive: true });
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                updateScrollProgress();
+                locomotiveScroll.update();
+            }, 100);
+        });
+
+        window.addEventListener('resize', () => {
+            updateScrollProgress();
+            locomotiveScroll.update();
+        });
+    </script>
+</body>
+
+</html>
